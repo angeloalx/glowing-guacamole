@@ -148,6 +148,7 @@
     </div>
     <div class="row-3" style="margin-top:8px">
       <button class="btn btn-ghost" id="btnGCalBurst">📆 Google Calendar (harian beberapa hari)</button>
+      <button class="btn btn-ghost" id="btnClearBursts">🧹 Hapus pengingat harian</button>
       <span style="align-self:center;color:#7a6b80" id="burstCountLabel"></span>
     </div>
 
@@ -202,7 +203,7 @@
     </section>
 
     <div class="banner" style="margin-top:14px">
-      🔔 Jika notifikasi tidak muncul, <b>tambahkan ke Google Calendar</b> atau <b>pasang aplikasi ini</b> ke layar utama.
+      🔔 <b>Unduh Kalender Google (Google Calendar)</b> untuk mendapatkan notifikasi. <b>Pasang aplikasi ini</b> ke layar utama untuk menandai kalender.
     </div>
   </main>
 </div>
@@ -447,7 +448,7 @@ function build(date){
     addDoodles(cell, base+extra);
     gridCal.appendChild(cell);
   }
-  burstCountLabel.textContent = bursts.length ? (`Hari pertama haid: ${bursts.length}`) : "";
+  burstCountLabel.textContent = bursts.length ? (`Pengingat harian aktif: ${bursts.length}`) : "";
 }
 
 // DOW
@@ -581,7 +582,7 @@ document.getElementById("btnAddBurst").addEventListener("click", ()=>{
   localStorage.setItem(burstKey, JSON.stringify(bursts));
   build(view);
   scheduleReminders();
-  showToast('<span class="ok">✓</span> Hari pertama haid dimulai ('+days+' hari)');
+  showToast('<span class="ok">✓</span> Hari pertama haid diaktifkan ('+days+' hari)');
   const b=document.getElementById("btnAddBurst"); if(b) b.textContent='Sudah selesai haid';
 });
   document.getElementById("btnGCalBurst").addEventListener("click", openGCalBurst);
@@ -595,7 +596,7 @@ document.getElementById("btnClearBursts").addEventListener("click", ()=>{
 
 // Init
 (function init(){
-  const b=document.getElementById("btnAddBurst"); if(b){ b.textContent = (bursts && bursts.length>0) ? "Matikan pengingat harian" : "➕ Hari pertama haid (mulai hari ini)"; }
+  const b=document.getElementById("btnAddBurst"); if(b){ b.textContent = (bursts && bursts.length>0) ? "Sudah selesai haid" : "➕ Hari pertama haid (mulai hari ini)"; }
   const now = new Date();
   selMonth.value = now.getMonth();
   selYear.value = now.getFullYear();
