@@ -144,13 +144,12 @@
       </div>
       <div>
         <label>&nbsp;</label>
-        <button class="btn" id="btnAddBurst">➕ Tambah pengingat harian (mulai hari ini)</button>
+        <button class="btn" id="btnAddBurst">➕ Hari pertama haid (mulai hari ini)</button>
 		<button class="btn btn-ghost" id="btnEnablePushBurst">🔔 Aktifkan Pengingat TTD Harian (periode)</button>
       </div>
     </div>
     <div class="row-3" style="margin-top:8px">
       <button class="btn btn-ghost" id="btnGCalBurst">📆 Google Calendar (harian beberapa hari)</button>
-      <button class="btn btn-ghost" id="btnClearBursts">🧹 Hapus pengingat harian</button>
       <span style="align-self:center;color:#7a6b80" id="burstCountLabel"></span>
     </div>
 
@@ -450,7 +449,7 @@ function build(date){
     addDoodles(cell, base+extra);
     gridCal.appendChild(cell);
   }
-  burstCountLabel.textContent = bursts.length ? (`Pengingat harian aktif: ${bursts.length}`) : "";
+  burstCountLabel.textContent = bursts.length ? (`Hari pertama haid: ${bursts.length}`) : "";
 }
 
 // DOW
@@ -573,8 +572,8 @@ document.getElementById("btnAddBurst").addEventListener("click", ()=>{
     localStorage.setItem(burstKey, JSON.stringify(bursts));
     build(view);
     scheduleReminders();
-    showToast('<span class="rm">✗</span> Pengingat harian dimatikan');
-    const b=document.getElementById("btnAddBurst"); if(b) b.textContent='➕ Tambah pengingat harian (mulai hari ini)';
+    showToast('<span class="rm">✗</span> Sudah selesai haid');
+    const b=document.getElementById("btnAddBurst"); if(b) b.textContent='➕ Hari pertama haid (mulai hari ini)';
     return;
   }
   // ON: add a single burst package starting today
@@ -584,12 +583,12 @@ document.getElementById("btnAddBurst").addEventListener("click", ()=>{
   localStorage.setItem(burstKey, JSON.stringify(bursts));
   build(view);
   scheduleReminders();
-  showToast('<span class="ok">✓</span> Pengingat harian diaktifkan ('+days+' hari)');
-  const b=document.getElementById("btnAddBurst"); if(b) b.textContent='Matikan pengingat harian';
+  showToast('<span class="ok">✓</span> Hari pertama haid dimulai ('+days+' hari)');
+  const b=document.getElementById("btnAddBurst"); if(b) b.textContent='Sudah selesai haid';
 });
   document.getElementById("btnGCalBurst").addEventListener("click", openGCalBurst);
 document.getElementById("btnClearBursts").addEventListener("click", ()=>{
-  const b=document.getElementById("btnAddBurst"); if(b) b.textContent='➕ Tambah pengingat harian (mulai hari ini)';
+  const b=document.getElementById("btnAddBurst"); if(b) b.textContent='➕ Hari pertama haid (mulai hari ini)';
   bursts = [];
   localStorage.setItem(burstKey, JSON.stringify(bursts));
   build(view);
@@ -598,7 +597,7 @@ document.getElementById("btnClearBursts").addEventListener("click", ()=>{
 
 // Init
 (function init(){
-  const b=document.getElementById("btnAddBurst"); if(b){ b.textContent = (bursts && bursts.length>0) ? "Matikan pengingat harian" : "➕ Tambah pengingat harian (mulai hari ini)"; }
+  const b=document.getElementById("btnAddBurst"); if(b){ b.textContent = (bursts && bursts.length>0) ? "Matikan pengingat harian" : "➕ Hari pertama haid (mulai hari ini)"; }
   const now = new Date();
   selMonth.value = now.getMonth();
   selYear.value = now.getFullYear();
